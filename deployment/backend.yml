@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: backend
-        image: chat/backend:latest
+        image: eftech93/chat-backend:latest
         imagePullPolicy: Never
         env:
         - name: PORT
