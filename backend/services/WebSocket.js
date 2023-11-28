@@ -1,4 +1,5 @@
 const { PORT } = require('../constants');
+const os = require('os');
 const WebSocketServer = require('ws');
 
 class WebSocketManager {
@@ -42,7 +43,7 @@ class WebSocketManager {
         this.sentMsg.push(`${data}`);
         this.webSockets.forEach(ws => {
             try {
-                ws.send(`${data} - from Broker`);
+                ws.send(`${data}`);
             } catch (e) {
             }
         });
@@ -57,7 +58,7 @@ class WebSocketManager {
                     return;
                 }
                 try {
-                    webSocket.send(`${data.data} - right from ws`);
+                    webSocket.send(`${data.data}`);
                 } catch (e) {
                 }
             });
@@ -81,7 +82,7 @@ class WebSocketManager {
     }
 
     sendWelcomeMessage(ws) {
-        ws.send("Welcome");
+        ws.send(`Welcome to ${os.hostname()}`);
     }
 
     sendExistingMessages(ws) {
