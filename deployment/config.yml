@@ -1,0 +1,8 @@
+apiVersion: v1 
+kind: ConfigMap 
+metadata:
+  name: chat-configs
+data:
+  # Configuration values can be set as key-value properties
+  broker_uri: guest:guest@rabbitmq
+  backend_domain: api.chat-test.com

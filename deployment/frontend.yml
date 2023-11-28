@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: chat-frontend
+  labels:
+    app: chat
+spec:
+  selector:
+    matchLabels:
+      app: frontend
+  replicas: 5
+  template:
+    metadata:
+      labels:
+        app: frontend
+    spec:
+      containers:
+      - name: frontend
+        image: chat/frontend:latest
+        imagePullPolicy: Never
+        env:
+        - name: REACT_APP_WS_DOMAIN
+          valueFrom:
+            configMapKeyRef:
+              name: chat-configs
+              key: backend_domain
+        - name: PORT
+          value: "4000"
+        ports:
+        - containerPort: 4000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: chat-frontend
+  labels:
+    app: frontend
+spec:
+  type: NodePort
+  ports:
+  - port: 4000
+  selector:
+    app: frontend
