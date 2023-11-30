@@ -17,7 +17,6 @@ spec:
       containers:
       - name: backend
         image: eftech93/chat-backend:latest
-        imagePullPolicy: Never
         env:
         - name: PORT
           value: "3400"
