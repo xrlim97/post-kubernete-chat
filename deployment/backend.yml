@@ -8,7 +8,7 @@ spec:
   selector:
     matchLabels:
       app: backend
-  replicas: 2
+  replicas: 1
   template:
     metadata:
       labels:
@@ -16,7 +16,8 @@ spec:
     spec:
       containers:
       - name: backend
-        image: eftech93/chat-backend:latest
+        image: chat/backend:latest
+        imagePullPolicy: Never
         env:
         - name: PORT
           value: "3400"
@@ -47,3 +48,22 @@ spec:
     targetPort: ws-port
   selector:
     app: backend
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-backend-app
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  rules:
+    - host: api.chat-test.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: chat-backend-master
+                port:
+                  number: 3400
