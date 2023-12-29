@@ -8,7 +8,7 @@ spec:
   selector:
     matchLabels:
       app: frontend
-  replicas: 2
+  replicas: 5
   template:
     metadata:
       labels:
@@ -16,7 +16,8 @@ spec:
     spec:
       containers:
       - name: frontend
-        image: eftech93/chat-frontend:latest
+        image: chat/frontend:latest
+        imagePullPolicy: Never
         env:
         - name: REACT_APP_WS_DOMAIN
           valueFrom:
@@ -40,3 +41,22 @@ spec:
   - port: 4000
   selector:
     app: frontend
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-frontend-app
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  rules:
+    - host: chat-test.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: chat-frontend
+                port: 
+                  number: 4000
