@@ -28,11 +28,6 @@ spec:
         ports:
         - containerPort: 3400
           name: ws-port
-        resources:
-          requests: 
-            cpu: "250m"
-          limits:
-            cpu: "500m"
 ---
 apiVersion: v1
 kind: Service
