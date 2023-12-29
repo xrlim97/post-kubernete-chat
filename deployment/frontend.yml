@@ -16,8 +16,7 @@ spec:
     spec:
       containers:
       - name: frontend
-        image: chat/frontend:latest
-        imagePullPolicy: Never
+        image: eftech93/chat-frontend:latest
         env:
         - name: REACT_APP_WS_DOMAIN
           valueFrom:
