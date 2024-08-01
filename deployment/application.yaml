@@ -11,7 +11,7 @@ spec:
   source:
     path: deployment
     repoURL: "https://github.com/xrlim97/post-kubernete-chat.git"
-    targetRevision: argocd
+    targetRevision: main
   syncPolicy:
     syncOptions:
       - CreateNamespace=true
