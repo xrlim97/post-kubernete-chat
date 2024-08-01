@@ -1,0 +1,17 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: chat
+  namespace: argocd
+spec:
+  destination:
+    namespace: chat
+    server: "https://kubernetes.default.svc"
+  project: default
+  source:
+    path: deployment
+    repoURL: "https://github.com/xrlim97/post-kubernete-chat.git"
+    targetRevision: argocd
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
