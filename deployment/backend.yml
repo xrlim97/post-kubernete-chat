@@ -61,4 +61,4 @@ spec:
                 name: chat-backend-master
                 port:
                   number: 3400
-                  #ajk
+                
